@@ -65,41 +65,33 @@
                      <children>
                         <VBox layoutX="-1.0" prefHeight="307.0" prefWidth="301.0">
                            <children>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="301.0">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
-                                    <Label fx:id="labelArquivo" text="arquivo" textFill="#d8d8d8" />
-                                    <Label text=" - Nome do arquivo processado: " textFill="#d8d8d8">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
+                                    <Label fx:id="labelArquivo" text="arquivo" textFill="#d8d8d8" wrapText="true" />
+                                    <Label text=" - Nome do arquivo processado: " textFill="#d8d8d8" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="200.0">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
-                                    <Label fx:id="labelNumeroFrases" text="XX" textFill="#d8d8d8" />
-                                    <Label text=" - Número de Frases processadas: " textFill="#d8d8d8">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
+                                    <Label fx:id="labelNumeroFrases" text="XX" textFill="#d8d8d8" wrapText="true" />
+                                    <Label text=" - Número de Frases processadas: " textFill="#d8d8d8" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="200.0">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
-                                    <Label fx:id="labelEstruturas" text="XX" textFill="#d8d8d8" />
+                                    <Label fx:id="labelEstruturas" text="XX" textFill="#d8d8d8" wrapText="true" />
                                     <Label text=" - Número de Estruturas identificadas: " textFill="#d8d8d8" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="200.0">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
-                                    <Label fx:id="labelMetros" text="10 - 12" textFill="#d8d8d8" />
-                                    <Label text=" - Metros buscados: " textFill="#d8d8d8" />
+                                    <Label fx:id="labelMetros" text="11.Hendecassilabo a 12.Dodecassilabo" textFill="#d8d8d8" wrapText="true" />
+                                    <Label prefHeight="20.0" prefWidth="124.0" text=" - Metros buscados: " textFill="#d8d8d8" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="200.0">
+                              <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0">
                                  <children>
-                                    <Label fx:id="labelTipos" text="F. Completas" textFill="#d8d8d8" />
+                                    <Label fx:id="labelTipos" text="F. Completas" textFill="#d8d8d8" wrapText="true" />
                                     <Label text=" - Tipo de Busca: " textFill="#d8d8d8" />
                                  </children>
                               </HBox>

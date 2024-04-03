@@ -574,6 +574,7 @@ public class Escansao {
         } else {
             versoEncontrado.setClassificacao("MaiorQ13");
         }
+        //System.out.println("Verso "+versoEncontrado+": "+versoEncontrado.getClassificacao());
         versoEncontrado.setNumeroDeSilabas(numSilabasPoeticas);
         versoEncontrado.setVersoEscandido(novoVerso.toString());
         return versoEncontrado;
@@ -1060,7 +1061,6 @@ public class Escansao {
             }
 
         }
-
         //Desfazer as sinéreses e elisões pode resultar na métrica que está sendo buscada? 
         //– Sim, desfazer os dois sucessivamente até que a métrica seja alcançada. 
         //O software irá começar pelas sinéreses.
@@ -1071,16 +1071,19 @@ public class Escansao {
             return ajustarSinereseElisoes(versoEncontrado, numSilabasPoeticas, novoVerso.toString(), minSilabas);
         }
 
+        //System.out.println("Bool: "+numSilabasPoeticas);
         if (classificacao.containsKey(numSilabasPoeticas)) {
             versoEncontrado.setClassificacao(classificacao.get(numSilabasPoeticas));
         } else {
             versoEncontrado.setClassificacao("MaiorQ13");
         }
+        
 //        System.out.println("Retornando :" + novoVerso.toString() + " - " + numSilabasPoeticas);
         versoEncontrado.setNumeroDeSilabasOriginais(numSilabasPoeticas);//???
         versoEncontrado.setVersoOriginalmenteEscandido(novoVerso.toString());
         versoEncontrado.setNumeroDeSilabas(numSilabasPoeticas);
         versoEncontrado.setVersoEscandido(novoVerso.toString());
+        //System.out.println("Classificacao Verso: "+versoEncontrado.getClassificacao());
         return versoEncontrado;
     }
 
@@ -1766,6 +1769,8 @@ public class Escansao {
     }
 
     public void carregarClassificacaoDoVerso() {
+    	classificacao.put(1, "Monossílabo");
+        classificacao.put(2, "Díssilabo");
         classificacao.put(3, "Trissílabo");
         classificacao.put(4, "Tetrassílabo");
         classificacao.put(5, "Pentassílabo");

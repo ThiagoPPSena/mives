@@ -91,6 +91,7 @@ public class Mineracao implements ProcessarLivroObservable {
             if (vBase != i) {
 
                 vTempAux = this.extrairPalavrasFraseInteiraCustomizada2(vTemp.getPalavras(), i, i);
+                //System.out.println("Verso Min.: "+vTempAux.getClassificacao());
                 if (vTempAux != null) {
                     vTempAux.setLocal(local);
                     vTempAux.setIndiceDeOrigemDaCadeia(frase.getIndiceDeOrigemDaCadeiaNaLinha());
@@ -277,11 +278,10 @@ public class Mineracao implements ProcessarLivroObservable {
                     }
                 } else if (buscarFraseInteira) {
                     //vTemp = this.extrairPalavrasFraseInteira(linhaBase, tipoDeVerso);
-
                     vTemp = this.extrairPalavrasFraseInteiraCustomizada2(linhaBase, tipoDeVersoInicio, tipoDeVersoFim);
-
+                    
                     if (vTemp != null && !containsNumber(vTemp.getPalavras())) {
-
+                    	//System.out.println("Verso da Frase: "+vTemp.getClassificacao());
                         vTemp.setLocal("Frases completas.");
                         vTemp.setSegmentoFrasico(linhaBase);
                         vTemp.setIndiceDeOrigemDaCadeia(f.getIndiceDeOrigemDaCadeiaNaLinha());
@@ -289,6 +289,7 @@ public class Mineracao implements ProcessarLivroObservable {
                         vTemp.setFraseCorrespondente(fraseCorrespondente);
                         pagina.getVersos().add(vTemp);
                         f.setVerso(vTemp);
+                        //System.out.println("Verso da Frase: "+f.getVerso());
                         int vBase = vTemp.getNumeroDeSilabas();
                         for (int i = tipoDeVersoInicio; i <= tipoDeVersoFim; i++) {
                             if (vBase != i) {
@@ -304,7 +305,9 @@ public class Mineracao implements ProcessarLivroObservable {
                         }
                     }
                     //                    }
+                
                 }
+                
                 vTemp = null;
                 //    System.gc();
                 notifyObservers(progresso);
@@ -410,6 +413,7 @@ public class Mineracao implements ProcessarLivroObservable {
         StringTokenizer f = new StringTokenizer(frase.toString());
         Verso verso = new Verso();
         verso = escansaoCustomizada2.contarSilabasPoeticas(frase, numeroSilabasInicio, 12, false);
+        //System.out.println("Verso escandido: "+verso);
         if (verso != null
                 && new StringTokenizer(frase).countTokens() == new StringTokenizer(verso.getVersoEscandido()).countTokens()
                 //                && verso.getNumeroDeSilabas() >= numeroSilabas) {
@@ -425,9 +429,10 @@ public class Mineracao implements ProcessarLivroObservable {
     private Verso extrairPalavrasFraseInteiraCustomizada2(String frase, int numeroSilabasInicio, int numeroSilabasFim) {
         StringTokenizer f = new StringTokenizer(frase.toString());
         Verso verso = new Verso();
+        //System.out.println("Verso escandido: "+verso);
 //        verso = escansaoCustomizada2.contarSilabasPoeticasNew(frase, numeroSilabasFim, numeroSilabasInicio, false); 
         verso = escansaoCustomizada2.contarSilabasPoeticasCompleta(frase, numeroSilabasFim, numeroSilabasInicio, false);//21/05/2017
-
+        
         /**
          * Exclusão forçada em fazer aqui, se autorizada...
          */
@@ -437,6 +442,7 @@ public class Mineracao implements ProcessarLivroObservable {
 
             verso.setPalavras(verso.getVersoEscandido().toString().replaceAll("#", "").replaceAll("§", "-").replaceAll("/", ""));
             verso.gerarPosicionamento();
+            //System.out.println("Verso escandido "+verso+": "+verso.getClassificacao());
             if (verso.getNumeroDeSilabas() != verso.getValidaMetro()) {
                 ErroContagem.adicionarErro(verso.getVersoEscandido(), verso.getPosicionamentoDasTonicas(), verso.getNumeroDeSilabas());
                 /*
@@ -445,6 +451,7 @@ public class Mineracao implements ProcessarLivroObservable {
                  */
                 return null;
             }
+            //System.out.println("Verso escandido (depois)"+verso+": "+verso.getClassificacao());
             return verso;
         }
         return null;

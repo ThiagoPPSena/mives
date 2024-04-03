@@ -70,7 +70,11 @@ public class MIVES extends Application {
     }
 
     private void closeWindowEvent(WindowEvent event) {
-        PrincipalHelper.arquivoDeDestino.delete();
+    	//System.out.println("Arquivo de Destino: "+PrincipalHelper.arquivoDeDestino);
+    	if(PrincipalHelper.arquivoDeDestino != null) {
+    		PrincipalHelper.arquivoDeDestino.delete();
+    	}
+        
     }
 
     public void carregarDLL() {

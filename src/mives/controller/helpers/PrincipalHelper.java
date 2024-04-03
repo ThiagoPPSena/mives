@@ -312,7 +312,7 @@ public class PrincipalHelper {
     public void preencherEstatisticas() {
         principal.labelArquivo.setText(Livro.getInstance().getArquivoDeOrigem().getName());
         principal.labelTipos.setText(MivesWizardData.getLocalBusca());
-        principal.labelTipos.setText(Livro.getInstance().getTiposBuscados());
+        principal.labelMetros.setText(Livro.getInstance().getTiposBuscados());
         principal.labelEstruturas.setText(Livro.getInstance().getSentencas().size() + "");
     }
 
@@ -372,6 +372,7 @@ public class PrincipalHelper {
         gerarEstruturaArvore();
         carregarMetro();
         int tipos[] = new int[estrutraArvore.size()];
+        System.out.println("Tamaho TIPOS: "+tipos.length);
         int k = 0;
         for (Integer key : estrutraArvore.keySet()) {
             tipos[k] = key;
@@ -596,14 +597,15 @@ public class PrincipalHelper {
     public void listarVersosEClassificacoes() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("MIVES - Abrir arquivo de texto para processamento.");
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Arquivos html", "html"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos html", "*.html"));
 
         try {
             File file = new File(fileChooser.showOpenDialog(null).getPath());
             LivroIO livroIO = new LivroIO();
             livroIO.salvarVersosEncontrados(Livro.getInstance(), file);
         } catch (Exception ex) {
-            Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
+        	System.out.println("Null Erro");
+            //Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

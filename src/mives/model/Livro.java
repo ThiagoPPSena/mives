@@ -821,6 +821,7 @@ public class Livro {
                     }
                     //Calculando o intervalo entre as estruturas de mesmo tipo
                     for (String tipo : distancias.keySet()) {
+                    	//System.out.println("Verso: "+frase.getVerso().getClassificacao());
                         if (!(frase.getVerso().getClassificacao().equals(tipo))) {
                             distancias.get(tipo).intervalo++;
                         } else {
@@ -924,6 +925,7 @@ public class Livro {
                 if (!(distancias.containsKey(v.getClassificacao()))) {
                     distancias.put(v.getClassificacao(), new Distancia());
                 }
+                System.out.println("Verso "+v+": "+v.getClassificacao());
             }
 
         }

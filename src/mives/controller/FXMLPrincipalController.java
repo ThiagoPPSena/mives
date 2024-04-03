@@ -218,7 +218,7 @@ public class FXMLPrincipalController implements Initializable, Observer {
     public void exportarParaHTML() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("MIVES - Exporta resumo em HTML...");
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("HTML", "html"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos html", "*.html"));
         try {
             File file = fileChooser.showSaveDialog(null);
             if (file != null) {
