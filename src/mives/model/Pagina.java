@@ -734,7 +734,12 @@ public class Pagina {
     }
 
     private String corrigirMaiusculaNoVerso(String frase, String verso, int posicaoIncial) {
-        verso = frase.substring(posicaoIncial, verso.length());
+//        System.out.println("Posição Inicial: "+posicaoIncial);
+//        System.out.println("Tamanho Verso: "+verso.length());
+//        System.out.println("Frase: "+frase.length());
+    	System.out.println("Verso Original: "+verso);
+    	verso = frase.substring(posicaoIncial, posicaoIncial+verso.length());
+    	System.out.println("Verso Final: "+verso+"\n");
         return verso;
     }
 

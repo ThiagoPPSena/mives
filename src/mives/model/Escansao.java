@@ -71,8 +71,14 @@ public class Escansao {
         if (palavraAtual.charAt(0) == '#') {
             palavraAtual = palavraAtual.replace("#", "");
         }
-
-        if (isVogal(palavraAnterior.replace(",", "").replace(".", "").charAt(palavraAnterior.replace(",", "").replace(".", "").length() - 1)) // && !(arrayVerso[i].contains("#"))) - Alteração realizada em 06/07 referente a utilização da vírgula - removida para faciliar o caso de elisão.
+        
+        int comprimento = palavraAnterior.replace(",", "").replace(".", "").length();
+//        if(comprimento <= 0) {
+//        	System.out.println("Elisão "+palavraAnterior.replace(",", "").replace(".", "")+": "+comprimento);
+//        }
+        
+        
+        if (comprimento > 0 && isVogal(palavraAnterior.replace(",", "").replace(".", "").charAt(comprimento - 1)) // && !(arrayVerso[i].contains("#"))) - Alteração realizada em 06/07 referente a utilização da vírgula - removida para faciliar o caso de elisão.
                 //E a próxima começar com vogal
                 && (isVogal(palavraAtual.replace("#", "").charAt(0)) //a próxima comecar por uma vogal - A VOGAL PRECISA SER ÁTONA
                 //Ou começar por com H - houver elisão.
