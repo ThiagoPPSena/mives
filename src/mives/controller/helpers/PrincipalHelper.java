@@ -27,6 +27,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.TreeItem;
@@ -203,14 +204,18 @@ public class PrincipalHelper {
         fileChooser.setTitle("MIVES - Mapa de Configuração.");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text doc(*.txt)", "*.txt"));
         fileChooser.setInitialFileName("*.txt");
-        try {
-            File file = fileChooser.showSaveDialog(null);
-            MapaConfiguracaoIO mapaIO = new MapaConfiguracaoIO();
-            mapaIO.imprimeMapaConfiguracaoEmTxtV2(file);
+        
+        File file = fileChooser.showSaveDialog(null);
+        if(file != null) {
+        	try {
+                MapaConfiguracaoIO mapaIO = new MapaConfiguracaoIO();
+                mapaIO.imprimeMapaConfiguracaoEmTxtV2(file);
 
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
     }
 
     public void ocorrenciaPorFrase() {
@@ -313,6 +318,7 @@ public class PrincipalHelper {
         principal.labelArquivo.setText(Livro.getInstance().getArquivoDeOrigem().getName());
         principal.labelTipos.setText(MivesWizardData.getLocalBusca());
         principal.labelMetros.setText(Livro.getInstance().getTiposBuscados());
+        System.out.println("Número de setenças após processamento: "+Livro.getInstance().getSentencas().size());
         principal.labelEstruturas.setText(Livro.getInstance().getSentencas().size() + "");
     }
 
@@ -581,7 +587,7 @@ public class PrincipalHelper {
 
         try {
             File file = new File(fileChooser.showOpenDialog(null).getPath());
-            URL url = file.toURL();
+            URL url = file.toURI().toURL();
             if (url != null) {
                 System.out.println("File: " + url.toString());
                 principal.webEngine.load(url.toString());
@@ -599,19 +605,34 @@ public class PrincipalHelper {
         fileChooser.setTitle("MIVES - Abrir arquivo de texto para processamento.");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arquivos html", "*.html"));
 
-        try {
-            File file = new File(fileChooser.showOpenDialog(null).getPath());
-            LivroIO livroIO = new LivroIO();
-            livroIO.salvarVersosEncontrados(Livro.getInstance(), file);
-        } catch (Exception ex) {
-        	System.out.println("Null Erro");
-            //Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        
+    	File file = fileChooser.showSaveDialog(null);
+    	if(file!=null) {
+    		LivroIO livroIO = new LivroIO();
+    		try {
+    			livroIO.salvarVersosEncontrados(Livro.getInstance(), file);
+    			
+    		} catch (Exception ex) {
+            	//System.out.println("Null Erro");
+            	alertaErroGravacao();
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro de Gravação ao executar o método salvarVersosEncontrados", ex);
+    		}
+    	}
+            
     }
 
     private void imprimirEmArquivo(String titulo, String tipo) {
 
     }
 
+    public void alertaErroGravacao() {
+    	Alert dialogoInfo = new Alert(Alert.AlertType.INFORMATION);
+        dialogoInfo.setTitle("MIVES");
+        dialogoInfo.setHeaderText("Erro de Gravação");
+        dialogoInfo.setContentText("Erro ao Gravar um arquivo");
+        // dialogoInfo.
+        dialogoInfo.showAndWait();
+    }
 }
+
+

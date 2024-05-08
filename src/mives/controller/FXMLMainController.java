@@ -23,6 +23,7 @@ import mives.controller.helpers.MainControllerHelper;
 import mives.controller.helpers.utils.MivesWizardData;
 import mives.controller.helpers.utils.PageWizard;
 import mives.controller.helpers.utils.Revista;
+import mives.model.Livro;
 import mives.model.MapaConfiguracao;
 
 /**

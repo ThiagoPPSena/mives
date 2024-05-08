@@ -8,6 +8,7 @@ package mives.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Observable;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +26,7 @@ import mives.model.MapaConfiguracao;
  *
  * @author Ricardo
  */
-public class FXMLEscolhaInicialControllerV2 implements Initializable {
+public class FXMLEscolhaInicialControllerV2 extends Observable implements Initializable {
 
     @FXML
     Button adicionarLivro;
@@ -50,10 +51,14 @@ public class FXMLEscolhaInicialControllerV2 implements Initializable {
     
     @FXML
     Label arquivoEscolhido;
+    
+    public static FXMLEscolhaInicialControllerV2 escolha = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+    	escolha = this;
+    	//System.out.println("Variável estática: "+FXMLPrincipalController.principal);
+    	//FXMLPrincipalController.addObserverEscolha();
     }
 
     @FXML
@@ -110,10 +115,13 @@ public class FXMLEscolhaInicialControllerV2 implements Initializable {
             	if(file.getCanonicalPath().endsWith(".xml")) {
 	                Livro.getInstance().setLivro(livroIO.ler(file));
 	                MapaConfiguracao.setMapaConfiguracao(Livro.getInstance().getMapaConfiguracao());
+	                System.out.println("Número de sentenças: "+Livro.getInstance().getSentencas().size());
 	                nomeArquivo.setText(file.getName());
 	                MainControllerHelper.controller.btnProximo.setDisable(true);
 	                MainControllerHelper.controller.btnVoltar.setDisable(true);
-	                MainControllerHelper.controller.nextPage();
+	                //MainControllerHelper.controller.nextPage();
+	                setChanged();
+	                notifyObservers(false);
             	} else {
             		alertaEscolhaExtensao(".xml");
             	}

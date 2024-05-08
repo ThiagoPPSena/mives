@@ -219,8 +219,6 @@
                 <Menu mnemonicParsing="false" style="-fx-text-fill: pink;" text="Arquivo">
                   <items>
                         <MenuItem fx:id="menuSalvar" mnemonicParsing="false" onAction="#salvar" text="Salvar" />
-                    <MenuItem mnemonicParsing="false" onAction="#carregarTextoExemplo" text="Apresentar resultados" />
-                        <MenuItem fx:id="menuExemplo" mnemonicParsing="false" onAction="#carregarArquivoExemplo" text="Carregar Arquivo" />
                         <MenuItem mnemonicParsing="false" onAction="#listarVersosEClassificacoes" text="Exportar Versos e Classificações" />
                   </items>
                 </Menu>

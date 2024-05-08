@@ -104,7 +104,7 @@ public class FXMLPrincipalController implements Initializable, Observer {
     public Label labelTipos;
     
     public static FXMLPrincipalController principal=null;
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         menuBar.setDisable(true);
@@ -124,10 +124,16 @@ public class FXMLPrincipalController implements Initializable, Observer {
     }
     
     //método para adicionar está classe como observadora da classe FXMLProcessandoLivroController
-    public static void addThisObserver() {
+    public static void addObserverProcesso() {
     	FXMLProcessandoLivroController.processar.addObserver(principal);
+    	
     }
 
+    public static void addObserverEscolha() {
+    	FXMLEscolhaInicialControllerV2.escolha.addObserver(principal);
+    	
+    }
+    
     int index = 0;
 
     public void testeLink() {
@@ -158,12 +164,18 @@ public class FXMLPrincipalController implements Initializable, Observer {
         helper.listarVersosEClassificacoes();
     }
 
-    public void carregarArquivoExemplo() {
+    /***
+     * Esse método foi retirado pois não tá funcionando
+     */
+    /***
+     * public void carregarArquivoExemplo() {
         webEngine = browser.getEngine();
         // Enable Javascript.
         webEngine.setJavaScriptEnabled(true);
         webEngine.load("file:///C://Users//Ricardo//Documents//arquivo.html");
     }
+     */
+    
 
     //Remover - Utilizado apenas para teste
     public void proximo() {
@@ -193,6 +205,10 @@ public class FXMLPrincipalController implements Initializable, Observer {
         helper.buscarNoTexto();
     }
 
+    /***
+     * Retirada desse método pois ele replica os dados na tela
+     */
+    /***
     public void carregarTextoExemplo() {
         // helper.carregarTextoExemplo();
 
@@ -201,7 +217,7 @@ public class FXMLPrincipalController implements Initializable, Observer {
         helper.carregarGraficosOcorrencias();
 
         //  webEngine.load("file:///C://Users//Ricardo//Documents//AMargem.html");
-    }
+    }***/
 
     public void gerarGraficoDistancia() {
         helper.gerarGraficoDistancia();

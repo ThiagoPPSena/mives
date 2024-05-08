@@ -56,7 +56,7 @@ public class FXMLProcessandoLivroController extends Observable implements Initia
         helper = new FXMLProcessandoLivroControllerHelper(this);
         btnAnalisarResultado.setDisable(true);
         label.setVisible(false);
-        FXMLPrincipalController.addThisObserver(); //Add a classe FXMLPrincipalController como observadora desta
+        FXMLPrincipalController.addObserverProcesso(); //Add a classe FXMLPrincipalController como observadora desta
     }
 
     @Override
