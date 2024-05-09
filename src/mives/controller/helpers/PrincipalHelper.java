@@ -207,12 +207,13 @@ public class PrincipalHelper {
         
         File file = fileChooser.showSaveDialog(null);
         if(file != null) {
+        	MapaConfiguracaoIO mapaIO = new MapaConfiguracaoIO();
         	try {
-                MapaConfiguracaoIO mapaIO = new MapaConfiguracaoIO();
                 mapaIO.imprimeMapaConfiguracaoEmTxtV2(file);
 
             } catch (Exception ex) {
-                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
+            	alertaErroGravacao();
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro ao exportar o mapa de configuração para texto", ex);
             }
         }
         
@@ -224,14 +225,20 @@ public class PrincipalHelper {
         fileChooser.setTitle("MIVES - Ocorrência de Estruturas por frase");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text doc(*.txt)", "*.txt"));
         fileChooser.setInitialFileName("*.txt");
-        try {
-            File file = fileChooser.showSaveDialog(null);
-            LivroIO livroIO = new LivroIO();
-            livroIO.imprimeSentencasOuVersos(Livro.getInstance(), file);
+        
+        File file = fileChooser.showSaveDialog(null);
+        
+        if(file!=null) {
+        	LivroIO livroIO = new LivroIO();
+            try {  
+                livroIO.imprimeSentencasOuVersos(Livro.getInstance(), file);
 
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+            	alertaErroGravacao();
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro ao exportar ocorrência por frase", ex);
+            }
         }
+        
     }
 
     public void sentecasTXT() {
@@ -239,44 +246,59 @@ public class PrincipalHelper {
         fileChooser.setTitle("MIVES - Exportar Sentenças para arquivo de texto");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text doc(*.txt)", "*.txt"));
         fileChooser.setInitialFileName("*.txt");
-        try {
-            File file = fileChooser.showSaveDialog(null);
-            LivroIO livroIO = new LivroIO();
-            livroIO.salvarSentencaLivro(Livro.getInstance(), file);
+        
+        File file = fileChooser.showSaveDialog(null);
+        
+       if(file!=null) {
+    	   LivroIO livroIO = new LivroIO();
+           try {
+               livroIO.salvarSentencaLivro(Livro.getInstance(), file);
 
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
-        }
+           } catch (Exception ex) {
+        	   alertaErroGravacao();
+               Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro ao exportar sentenças para arquivo texto", ex);
+           }
+       }
     }
 
     public void sentencasXml() {
-        SentencasO sentencasO = new SentencasO(Livro.getInstance().comporSentencas());
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("MIVES - Exportar Sentenças para XML");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text XML(*.xml)", "*.xml"));
         fileChooser.setInitialFileName("*.xml");
-        try {
-            File file = fileChooser.showSaveDialog(null);
-            sentencasO.salvarComo(file);
+        
+        File file = fileChooser.showSaveDialog(null);
+        if(file!=null) {
+        	try {
+        		SentencasO sentencasO = new SentencasO(Livro.getInstance().comporSentencas());
+                sentencasO.salvarComo(file);
 
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+            	alertaErroGravacao();
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro ao exportar sentenças para arquivo XML", ex);
+            }
+
         }
-
+        
     }
 
     public void sentencasXmlGeral() {
-        SentencasO sentencasO = new SentencasO(Livro.getInstance().comporSentencasGeral());
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("MIVES - Exportar Sentenças para XML");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text XML(*.xml)", "*.xml"));
         fileChooser.setInitialFileName("*.xml");
-        try {
-            File file = fileChooser.showSaveDialog(null);
-            sentencasO.salvarComo(file);
 
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
+        File file = fileChooser.showSaveDialog(null);
+        if(file!=null) {
+        	try {
+        		SentencasO sentencasO = new SentencasO(Livro.getInstance().comporSentencasGeral());
+                sentencasO.salvarComo(file);
+
+            } catch (Exception ex) {
+            	alertaErroGravacao();
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro ao exportar sentenças geral para arquivo XML", ex);
+            }
+
         }
 
     }
@@ -288,15 +310,21 @@ public class PrincipalHelper {
         fileChooser.setTitle("MIVES - Exportar Matriz de Sentenças para TXT");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text doc(*.txt)", "*.txt"));
         fileChooser.setInitialFileName("*.txt");
-        try {
-            File file = fileChooser.showSaveDialog(null);
-            LivroIO livroIO = new LivroIO();
-            livroIO.salvarVersosEncontrados(Livro.getInstance(), file);
-            livroIO.salvarMatrizDeTipos(Livro.getInstance(), file, Livro.getInstance().getTipoDeVersoInicio(), Livro.getInstance().getTipoDeVersoFim());
+        
+        File file = fileChooser.showSaveDialog(null);
+        
+        if(file!=null) {
+        	LivroIO livroIO = new LivroIO();
+            try {
+                livroIO.salvarVersosEncontrados(Livro.getInstance(), file);
+                livroIO.salvarMatrizDeTipos(Livro.getInstance(), file, Livro.getInstance().getTipoDeVersoInicio(), Livro.getInstance().getTipoDeVersoFim());
 
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+            	alertaErroGravacao();
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro ao exportar sentenças e tipos identificados", ex);
+            }
         }
+        
     }
 
     public void versosClassificacao() {
@@ -304,13 +332,17 @@ public class PrincipalHelper {
         fileChooser.setTitle("MIVES - Versos encontrados no texto");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text doc(*.txt)", "*.txt"));
         fileChooser.setInitialFileName("*.txt");
-        try {
-            File file = fileChooser.showSaveDialog(null);
-            LivroIO livroIO = new LivroIO();
-            livroIO.salvarVersosEncontrados(Livro.getInstance(), file);
+        
+        File file = fileChooser.showSaveDialog(null);
+        if(file!=null) {
+        	LivroIO livroIO = new LivroIO();
+            try {
+                livroIO.salvarVersosEncontrados(Livro.getInstance(), file);
 
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+            	alertaErroGravacao();
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro ao exportar versos e classificações", ex);
+            }
         }
     }
 
