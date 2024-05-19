@@ -155,6 +155,42 @@ public class PrincipalHelper {
         Stage secondStage = new Stage();
         bct.start(secondStage);
     }
+    
+    public void dispersaoGeral() {
+    	FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("MIVES - Dispersão de Sentenças Geral");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text doc(*.txt)", "*.txt"));
+        fileChooser.setInitialFileName("*.txt");
+        
+        File file = fileChooser.showSaveDialog(null);
+        if(file!=null) {
+        	LivroIO livroIO = new LivroIO();
+        	try {
+        		livroIO.imprimeDispersaoOcorrencia(Livro.getInstance(), file);
+        	}catch(Exception ex) {
+        		alertaErroGravacao();
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro ao exportar Dispersão de Sentenças Geral", ex);
+        	}
+        }
+    }
+    
+    public void dispersaoTipo() {
+    	FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("MIVES - Dispersão de Sentenças Por Tipo");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text doc(*.txt)", "*.txt"));
+        fileChooser.setInitialFileName("*.txt");
+        
+        File file = fileChooser.showSaveDialog(null);
+        if(file!=null) {
+        	LivroIO livroIO = new LivroIO();
+        	try {
+        		livroIO.imprimeDispersaoOcorrenciaPorTipo(Livro.getInstance(), file);
+        	}catch(Exception ex) {
+        		alertaErroGravacao();
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro ao exportar Dispersão de Sentenças Por Tipo", ex);
+        	}
+        }
+    }
 
     public void distanciasMetrificadas() {
         Livro.getInstance().calcularDistancias();
@@ -190,13 +226,18 @@ public class PrincipalHelper {
         fileChooser.setTitle("MIVES - Frases do Texto.");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text doc(*.txt)", "*.txt"));
         fileChooser.setInitialFileName("*.txt");
-        try {
-            File file = fileChooser.showSaveDialog(null);
-            LivroIO livroIO = new LivroIO();
-            livroIO.salvarFrasesLivro(Livro.getInstance(), file);
-        } catch (Exception ex) {
-            Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, null, ex);
+        
+        File file = fileChooser.showSaveDialog(null);
+        if(file!=null) {
+        	LivroIO livroIO = new LivroIO();
+        	try {
+                livroIO.salvarFrasesLivro(Livro.getInstance(), file);
+            } catch (Exception ex) {
+            	alertaErroGravacao();
+                Logger.getLogger(PrincipalHelper.class.getName()).log(Level.SEVERE, "Erro ao exportar frases do texto", ex);
+            }
         }
+        
     }
 
     public void mapaConfiguracao() {

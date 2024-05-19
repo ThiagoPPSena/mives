@@ -247,6 +247,14 @@ public class FXMLPrincipalController implements Initializable, Observer {
             ex.printStackTrace();
         }
     }
+    
+    public void dispersaoGeral() {
+    	helper.dispersaoGeral();
+    }
+    
+    public void dispersaoTipo() {
+    	helper.dispersaoTipo();
+    }
 
     public void dsitribuicaDeTonicas() {
         helper.dsitribuicaDeTonicas();

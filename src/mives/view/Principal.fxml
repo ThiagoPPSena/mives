@@ -237,8 +237,8 @@
                         <MenuItem mnemonicParsing="false" onAction="#exportarParaHTML" text="HTML" />
                         <Menu mnemonicParsing="false" text="Dispersão de Sentenças">
                           <items>
-                            <MenuItem mnemonicParsing="false" text="Geral" />
-                              <MenuItem mnemonicParsing="false" text="Por tipo" />
+                            <MenuItem mnemonicParsing="false" onAction="#dispersaoGeral" text="Geral" />
+                              <MenuItem mnemonicParsing="false" onAction="#dispersaoTipo" text="Por tipo" />
                           </items>
                         </Menu>
                         <MenuItem mnemonicParsing="false" onAction="#distanciasMetrificadas" text="Distâncias entre sentenças metrificadas" />
